@@ -275,16 +275,16 @@ def main():
     pdf_dir = "PDF_files"
 
     qr_config = QRCodeConfig(
-        version=3,
+        version=8,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
+        box_size=12,
         border=4,
         fill_color="black",
         back_color="white",
     )
 
     pdf_config = PDFConfig(
-        page_size=(300, 400),
+        page_size=(225, 400),
         background_image="background.jpg",
         title_font="Vazir-Bold",
         title_font_size=20,
@@ -293,9 +293,9 @@ def main():
         number_font_size=14,
         number_color=(0, 0, 0),  # Black
         qr_size=150,
-        title_y_offset=25,
-        qr_y_offset=68,
-        number_y_offset=75,
+        title_y_offset=40,
+        qr_y_offset=63,
+        number_y_offset=70,
     )
 
     # Process records
