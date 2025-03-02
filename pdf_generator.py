@@ -267,6 +267,7 @@ def process_records(
 def main():
     # Register Farsi font
     FontManager.register_font("BNazanin", "BNazanin.ttf")
+    FontManager.register_font("Vazir-Bold", "Vazir-Bold.ttf")
 
     # Configuration
     csv_file = "list.csv"
@@ -285,7 +286,7 @@ def main():
     pdf_config = PDFConfig(
         page_size=(300, 400),
         background_image="background.jpg",
-        title_font="BNazanin",
+        title_font="Vazir-Bold",
         title_font_size=20,
         title_color=(1, 1, 1),  # White
         number_font="Helvetica",
