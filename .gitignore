@@ -169,3 +169,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Generated QR code folder
+QR_codes/*
+
+# Generated PDF files folder
+PDF_files/*
