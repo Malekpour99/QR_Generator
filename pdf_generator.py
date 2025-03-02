@@ -13,6 +13,9 @@ from reportlab.pdfbase import pdfmetrics
 pdfmetrics.registerFont(TTFont("BNazanin", "BNazanin.ttf"))
 farsi_font = "BNazanin"
 
+# PDF background image path
+background_image = "background.jpg"
+
 # Custom page size for PDF files (width, height)
 custom_page_size = (300, 400)
 
@@ -41,7 +44,7 @@ for index, row in df.iterrows():
         version=3,  # 29x29 grid
         error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
-        border=4
+        border=4,
     )
     qr.add_data(number)
     qr.make(fit=True)
@@ -55,8 +58,17 @@ for index, row in df.iterrows():
     pdf_file = os.path.join(pdf_dir, f"{index+1}-{raw_name}.pdf")
     c = canvas.Canvas(pdf_file, pagesize=custom_page_size)
 
+    # Draw background image (make sure the image covers the full page)
+    c.drawImage(
+        background_image,
+        0,
+        0,
+        width=custom_page_size[0],
+        height=custom_page_size[1],
+    )
+
     # Set font
-    c.setFont(farsi_font, 16)
+    c.setFont(farsi_font, 20)
 
     # Center positioning
     page_width, page_height = custom_page_size
@@ -64,16 +76,20 @@ for index, row in df.iterrows():
     y_position = page_height - 100
 
     # Add Farsi Name (Title)
-    c.drawCentredString(x_center, y_position, farsi_name)
+    c.setFillColorRGB(1, 1, 1) 
+    c.drawCentredString(x_center, y_position - 25, farsi_name)
 
     # Add QR Code Image
     qr_size = 150  # QR code size
     qr_img = ImageReader(qr_img_path)
-    c.drawImage(qr_img, x_center - (qr_size / 2), y_position - qr_size - 10, qr_size, qr_size)
+    c.drawImage(
+        qr_img, x_center - (qr_size / 2), y_position - qr_size - 68, qr_size, qr_size
+    )
 
     # Add Number Below QR Code
-    c.setFont("Helvetica", 12)
-    c.drawCentredString(x_center, y_position - qr_size - 30, number)
+    c.setFont("Helvetica", 14)
+    c.setFillColorRGB(0, 0, 0)
+    c.drawCentredString(x_center, y_position - qr_size - 75, number)
 
     # Save the PDF
     c.save()
