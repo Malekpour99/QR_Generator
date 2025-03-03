@@ -162,7 +162,14 @@ class PDFGenerator:
         )
 
         # Add name (title)
-        c.setFont(self.config.title_font, self.config.title_font_size)
+        c.setFont(
+            self.config.title_font,
+            (
+                self.config.title_font_size
+                if len(name) < 22
+                else self.config.title_font_size // 2
+            ),
+        )
         c.setFillColorRGB(*self.config.title_color)
         c.drawCentredString(x_center, y_position - self.config.title_y_offset, name)
 
