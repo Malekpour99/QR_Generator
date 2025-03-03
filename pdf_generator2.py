@@ -277,7 +277,7 @@ def main():
     qr_config = QRCodeConfig(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=2,
+        box_size=5,
         border=2,
         fill_color="black",
         back_color="white",
